@@ -17,8 +17,35 @@
  * '01 Jan 1970 00:00:00 UTC' => 0
  * '04 Dec 1995 00:12:00 UTC' => 818035920000
  */
-function dateToTimestamp(/* date */) {
-  throw new Error('Not implemented');
+function dateToTimestamp(date) {
+  const dateArr = date.split(' ');
+  const timeArr = dateArr[3].split(':');
+  const months = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+  ];
+
+  const formatedDate = new Date(
+    Date.UTC(
+      dateArr[2],
+      months.indexOf(dateArr[1]),
+      dateArr[0],
+      timeArr[0],
+      timeArr[1],
+      timeArr[2]
+    )
+  );
+  return formatedDate.getTime();
 }
 
 /**
@@ -31,8 +58,13 @@ function dateToTimestamp(/* date */) {
  * Date(2023, 5, 1, 8, 20, 55) => '08:20:55'
  * Date(2015, 10, 20, 23, 15, 1) => '23:15:01'
  */
-function getTime(/* date */) {
-  throw new Error('Not implemented');
+function getTime(date) {
+  const seconds =
+    date.getSeconds() >= 10 ? date.getSeconds() : `0${date.getSeconds()}`;
+  const minutes =
+    date.getMinutes() >= 10 ? date.getMinutes() : `0${date.getMinutes()}`;
+  const hours = date.getHours() >= 10 ? date.getHours() : `0${date.getHours()}`;
+  return `${hours}:${minutes}:${seconds}`;
 }
 
 /**
